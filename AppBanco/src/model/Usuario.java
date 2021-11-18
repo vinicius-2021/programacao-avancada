@@ -10,20 +10,10 @@ package model;
  * @author jdhein
  */
 public class Usuario {
-    
-      private int id;
+     private int id;
     private String nome;
     private String login;
     private String senha;
-private String Cpf;
-
-    public String getCpf() {
-        return Cpf;
-    }
-
-    public void setCpf(String Cpf) {
-        this.Cpf = Cpf;
-    }
 
     public int getId() {
         return id;
@@ -56,7 +46,24 @@ private String Cpf;
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
-    
+
+    public void setCpf(String trim) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getCpf() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getDataNasc() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getGenero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getConfSenha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -7,6 +7,7 @@ package telas;
 
 import tools.CaixaDeDialogo;
 
+
 /**
  *
  * @author vinicius.altenhofen
@@ -37,7 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        menCadastros.setText("dsfdasffds");
+        menCadastros.setText("Cadastros");
 
         menUsuarios.setText("Usuarios");
         menUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -71,11 +72,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 926, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         pack();
@@ -83,7 +84,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menUsuariosActionPerformed
         // TODO add your handling code here:
-     
+      try{
+            CadastroUsuario tela = new CadastroUsuario();
+            tela.setVisible(true);
+            
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro");
+        }
+        
         
     }//GEN-LAST:event_menUsuariosActionPerformed
 
@@ -129,7 +137,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
