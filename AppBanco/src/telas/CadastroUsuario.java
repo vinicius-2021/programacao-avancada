@@ -49,7 +49,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtDataNasc = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
-        lblUsuario1 = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
         txtGenero = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -120,8 +120,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUsuario.setText("CPF:");
 
-        lblUsuario1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblUsuario1.setText("Genero:");
+        lblGenero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblGenero.setText("Genero:");
 
         txtGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione --", "Masculino", "Femenino" }));
 
@@ -153,7 +153,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                                         .addComponent(lblUsuario)))
                                 .addGap(100, 100, 100)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblUsuario1)
+                                    .addComponent(lblGenero)
                                     .addComponent(lblConfSenha)
                                     .addComponent(txtDataNasc)
                                     .addComponent(txtConfSenha)
@@ -187,7 +187,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsuario)
-                    .addComponent(lblUsuario1))
+                    .addComponent(lblGenero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,8 +299,8 @@ private Usuario guardarDados(){
             
             objeto.setCpf(txtCpf.getText().trim());
             objeto.setNome(txtNome.getText().trim());
-            objeto.setSenha(txtSenha.getText());
-            
+            objeto.setNascimento(txtDataNasc.getText());
+            objeto.setGenero(txtGenero.getName());
             
             
             
@@ -410,9 +410,9 @@ private Usuario guardarDados(){
         lblId.setText("id");
         txtNome.setText("");
         txtCpf.setText("");
+        txtGenero.setName("");
         txtCpf.setEnabled(true);
         txtDataNasc.setText("");
-        
         txtSenha.setText("");
         txtConfSenha.setText("");
        
@@ -425,11 +425,10 @@ private Usuario guardarDados(){
         txtNome.setText(objeto.getNome());
         txtCpf.setText(objeto.getCpf());
         
-        txtDataNasc.setText(objeto.getDataNasc());
+        txtDataNasc.setText(objeto.getNascimento());
+     txtGenero.setName(objeto.getGenero());
      
         
-        txtSenha.setText(objeto.getSenha());
-        txtConfSenha.setText(objeto.getConfSenha());
          
      }catch(Exception ex){
      }
@@ -446,9 +445,9 @@ private Usuario guardarDados(){
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jtbUsuarios;
     private javax.swing.JLabel lblConfSenha;
+    private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JLabel lblUsuario1;
     private javax.swing.JPasswordField txtConfSenha;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDataNasc;
