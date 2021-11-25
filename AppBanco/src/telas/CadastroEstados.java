@@ -6,6 +6,7 @@
 package telas;
 
 import controller.UsuarioController;
+import javax.swing.JTable;
 import model.Usuario;
 import tools.CaixaDeDialogo;
 
@@ -19,7 +20,9 @@ public class CadastroEstados extends javax.swing.JFrame {
      * Creates new form CadastroEstados
      */
     public CadastroEstados() {
+        
         initComponents();
+         
     }
 
     /**
@@ -39,6 +42,7 @@ public class CadastroEstados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,12 +63,24 @@ public class CadastroEstados extends javax.swing.JFrame {
                 "Nome", "Sigla"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnSalvar.setText("SALVAR");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -79,19 +95,21 @@ public class CadastroEstados extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnSalvar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnVoltar))
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(39, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(btnSalvar)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +125,9 @@ public class CadastroEstados extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnSalvar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnVoltar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -141,6 +161,73 @@ public class CadastroEstados extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:try{
+
+            try{
+
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setVisible(true);
+            dispose();
+
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Sucesso");
+
+        }catch(Exception ex){
+
+        }
+
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+        try {
+            //pega a linha selecionada
+            int linhaSelecionada = jTable1.getSelectedRow();
+
+            UsuarioController objUsuarioController = new UsuarioController();
+
+            // Primeira coluna da linha
+            String codigo = jTable1.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //buscar no banco de dados o registro e preencher nos campos da tela
+            objUsuarioController = new UsuarioController();
+            Usuario objeto = objUsuarioController.buscar(codigo);
+
+            //Verifica se clicou na coluna 2 => EXCLUIR
+            if (jTable1.isColumnSelected(2)) {
+                try {
+                    boolean wPergunta = CaixaDeDialogo.obterinstancia()
+                    .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
+                    if (wPergunta == true) {
+                        //exclusão do registro selecionado
+                        objUsuarioController = new UsuarioController();
+                        boolean retorno = objUsuarioController.excluir(codigo);
+                        if(retorno){
+                        
+                            CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
+                        }else{
+                            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir");
+                        }
+                    }
+
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+            } else {
+                if (objeto != null) {
+                    preencherCampos(objeto);
+                }
+            }
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
+        
+    }                                        
+
+    }//GEN-LAST:event_jTable1MousePressed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -175,9 +262,71 @@ public class CadastroEstados extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    private Usuario guardarDados(){
+        try{
+            Usuario objeto = new Usuario();
+            
+            
+            
+            
+            
+                        
+            return objeto;
+            
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    private Usuario Atualizar(){
+      try {
+
+
+            UsuarioController objUsuarioController = new UsuarioController();
+           JTable cjtbUsuarios;
+            
+            
+
+            objUsuarioController.preencher(jTable1);
+
+
+        } catch (Exception ex) {
+    
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+            return null;
+        }
+    
+
+ 
+     
+      //função para buscar as informações e preencher em tela
+    private void atualizarTabela(String filtro) {
+        try {
+         UsuarioController   objUsuarioController = new UsuarioController();
+            objUsuarioController.preencher(jTable1);
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+     
+     private void preencherCampos(Usuario objeto){
+         try{
+        
+       
+     
+        
+         
+     }catch(Exception ex){
+     }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,9 +338,6 @@ public class CadastroEstados extends javax.swing.JFrame {
 
     private boolean validarDados() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+}
 
-    private Usuario guardarDados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

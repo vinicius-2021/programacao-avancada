@@ -32,39 +32,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         menCadastros = new javax.swing.JMenu();
-        menUsuarios = new javax.swing.JMenuItem();
-        menCandidatos = new javax.swing.JMenuItem();
-        menSair = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         menCadastros.setText("Cadastros");
 
-        menUsuarios.setText("Usuarios");
-        menUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Cadastro Usuario");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menUsuariosActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        menCadastros.add(menUsuarios);
+        menCadastros.add(jMenuItem1);
 
-        menCandidatos.setText("Candidatos");
-        menCandidatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menCandidatosActionPerformed(evt);
-            }
-        });
-        menCadastros.add(menCandidatos);
+        jMenuItem2.setText("Cadastro Cidades");
+        menCadastros.add(jMenuItem2);
+
+        jMenuItem3.setText("Cadastro Estados");
+        menCadastros.add(jMenuItem3);
+
+        jMenuItem4.setText("Vacinacao");
+        menCadastros.add(jMenuItem4);
+
+        jMenuItem5.setText("Vacinacao a Fazer");
+        menCadastros.add(jMenuItem5);
 
         jMenuBar1.add(menCadastros);
-
-        menSair.setText("Sair");
-        menSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menSairActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(menSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -82,41 +80,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menUsuariosActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-      try{
-            CadastroUsuario tela = new CadastroUsuario();
-            tela.setVisible(true);
-            
-        }catch(Exception ex){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro");
-        }
-        
-        
-    }//GEN-LAST:event_menUsuariosActionPerformed
-
-    private void menSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menSairActionPerformed
-        // TODO add your handling code here:
-        try{
-            boolean resposta;
-            resposta = CaixaDeDialogo.obterinstancia()
-                    .pedirConfirmacao("Deseja mesmo sair do programa?",
-                            "Confirmação", 'p');
-            
-            if (resposta){
-                System.exit(0); //fecha todo o programa
-            }
-            
-        }catch(Exception ex){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao sair do programa");
-        } 
-        
-        
-    }//GEN-LAST:event_menSairActionPerformed
-
-    private void menCandidatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCandidatosActionPerformed
-       
-    }//GEN-LAST:event_menCandidatosActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,9 +117,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu menCadastros;
-    private javax.swing.JMenuItem menCandidatos;
-    private javax.swing.JMenu menSair;
-    private javax.swing.JMenuItem menUsuarios;
     // End of variables declaration//GEN-END:variables
 }

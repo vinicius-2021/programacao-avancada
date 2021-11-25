@@ -198,6 +198,9 @@ public class UsuarioController {
         
         cabecalhos.add("ID");
         cabecalhos.add("Nome");
+        cabecalhos.add("Cpf");
+        cabecalhos.add("Genero");
+        cabecalhos.add("Nascimento");
         cabecalhos.add("Exc");
              
         ResultSet result = null;
@@ -205,7 +208,7 @@ public class UsuarioController {
         try {
 
 
-            String wSql = " SELECT id, nome  FROM usuarios ORDER BY nome ";
+            String wSql = " SELECT id, nome,cpf,genero,nascimento  FROM usuarios ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             

@@ -6,6 +6,7 @@
 package telas;
 
 import controller.UsuarioController;
+import javax.swing.JTable;
 import model.Usuario;
 import tools.CaixaDeDialogo;
 
@@ -20,6 +21,7 @@ public class CadastroCidade extends javax.swing.JFrame {
      */
     public CadastroCidade() {
         initComponents();
+       
     }
 
     /**
@@ -41,6 +43,7 @@ public class CadastroCidade extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbUsuarios = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +57,7 @@ public class CadastroCidade extends javax.swing.JFrame {
         jLabel3.setText("Cep:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Endereço:");
+        jLabel4.setText("Endereco:");
 
         btnSalvar.setText("SALVAR");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,31 +81,35 @@ public class CadastroCidade extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtbUsuarios);
 
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextField1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(btnSalvar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jTextField3)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1))
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,9 +129,11 @@ public class CadastroCidade extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnVoltar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -182,7 +191,7 @@ public class CadastroCidade extends javax.swing.JFrame {
                         objUsuarioController = new UsuarioController();
                         boolean retorno = objUsuarioController.excluir(codigo);
                         if(retorno){
-                            limparTela();
+                          
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Registro excluído com sucesso");
                         }else{
                             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir");
@@ -193,9 +202,9 @@ public class CadastroCidade extends javax.swing.JFrame {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
                 }
             } else {
-                if (objeto != null) {
+                
                     preencherCampos(objeto);
-                }
+               
             }
 
         } catch (Exception ex) {
@@ -203,6 +212,27 @@ public class CadastroCidade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtbUsuariosMousePressed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+       try{
+
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setVisible(true);
+            dispose();
+
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Sucesso");
+
+        }catch(Exception ex){
+
+        }
+
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -237,9 +267,69 @@ public class CadastroCidade extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    private Usuario guardarDados(){
+        try{
+            Usuario objeto = new Usuario();
+            
+            
+            
+            
+                        
+            return objeto;
+            
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    private Usuario Atualizar(){
+      try {
+
+
+            UsuarioController objUsuarioController = new UsuarioController();
+           JTable jtbUsuarios = null;
+            
+            
+
+            objUsuarioController.preencher(jtbUsuarios);
+
+
+        } catch (Exception ex) {
+    
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+            return null;
+        }
+    
+
+   
+     
+      //função para buscar as informações e preencher em tela
+    private void atualizarTabela(String filtro) {
+        try {
+         UsuarioController   objUsuarioController = new UsuarioController();
+            objUsuarioController.preencher(jtbUsuarios);
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+     
+     private void preencherCampos(Usuario objeto){
+         try{
+        
+       
+         
+     }catch(Exception ex){
+     }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,15 +345,4 @@ public class CadastroCidade extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private Usuario guardarDados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void limparTela() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void preencherCampos(Usuario objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
