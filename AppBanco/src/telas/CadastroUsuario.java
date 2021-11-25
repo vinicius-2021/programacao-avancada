@@ -9,6 +9,7 @@ import controller.UsuarioController;
 import javax.swing.JTable;
 import model.Usuario;
 import tools.CaixaDeDialogo;
+import tools.tools;
 
 /**
  *
@@ -21,6 +22,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
      */
     public CadastroUsuario() {
         initComponents();
+         limparTela();
     }
 
     /**
@@ -51,6 +53,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblGenero = new javax.swing.JLabel();
         txtGenero = new javax.swing.JComboBox<>();
+        btnVoltar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,7 +113,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lblConfSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblConfSenha.setText("Confirmar Senha:");
 
-        txtDataNasc.setText("  /   /    ");
         txtDataNasc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDataNascActionPerformed(evt);
@@ -124,6 +126,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lblGenero.setText("Genero:");
 
         txtGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione --", "Masculino", "Femenino" }));
+
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,12 +162,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
                                         .addComponent(lblUsuario)))
                                 .addGap(100, 100, 100)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblGenero)
-                                    .addComponent(lblConfSenha)
                                     .addComponent(txtDataNasc)
                                     .addComponent(txtConfSenha)
-                                    .addComponent(btnLimpar)
-                                    .addComponent(txtGenero, 0, 200, Short.MAX_VALUE)))
+                                    .addComponent(txtGenero, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(lblGenero)
+                                    .addComponent(lblConfSenha)
+                                    .addComponent(btnLimpar)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,6 +179,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +209,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(lblConfSenha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,7 +219,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(btnLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVoltar)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,7 +308,76 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private void txtDataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataNascActionPerformed
-private Usuario guardarDados(){
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+         try{
+            
+            
+         
+            
+            
+            
+                TelaLogin tela = new TelaLogin();
+                tela.setVisible(true);
+                dispose();
+                
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Sucesso");
+            
+            
+        
+            
+       }catch(Exception ex){
+           
+        }
+
+        
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    
+
+    
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        //CUSTOMIZAR TEMA
+        
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CadastroUsuario().setVisible(true);
+            }
+        });
+    }
+    
+    private Usuario guardarDados(){
         try{
             Usuario objeto = new Usuario();
             
@@ -349,7 +433,7 @@ private Usuario guardarDados(){
 
 
             UsuarioController objUsuarioController = new UsuarioController();
-           JTable cjtbUsuarios;
+           JTable jtbUsuarios = null;
             
             
 
@@ -363,48 +447,6 @@ private Usuario guardarDados(){
             return null;
         }
     
-    
-
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        //CUSTOMIZAR TEMA
-        
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroUsuario().setVisible(true);
-            }
-        });
-    }
 
      private void limparTela() {
         lblId.setText("id");
@@ -415,8 +457,19 @@ private Usuario guardarDados(){
         txtDataNasc.setText("");
         txtSenha.setText("");
         txtConfSenha.setText("");
-       
+        atualizarTabela("");
         }
+     
+      //função para buscar as informações e preencher em tela
+    private void atualizarTabela(String filtro) {
+        try {
+         UsuarioController   objUsuarioController = new UsuarioController();
+            objUsuarioController.preencher(jtbUsuarios);
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
      
      private void preencherCampos(Usuario objeto){
          try{
@@ -437,6 +490,7 @@ private Usuario guardarDados(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
