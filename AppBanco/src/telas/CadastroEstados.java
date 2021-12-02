@@ -164,17 +164,7 @@ public class CadastroEstados extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:try{
 
-            try{
-
-            TelaPrincipal tela = new TelaPrincipal();
-            tela.setVisible(true);
-            dispose();
-
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Sucesso");
-
-        }catch(Exception ex){
-
-        }
+           
 
     }//GEN-LAST:event_btnVoltarActionPerformed
 

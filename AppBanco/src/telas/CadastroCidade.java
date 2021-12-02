@@ -5,6 +5,7 @@
  */
 package telas;
 
+import Controller.CidadeController;
 import controller.UsuarioController;
 import javax.swing.JTable;
 import model.Usuario;
@@ -33,22 +34,22 @@ public class CadastroCidade extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtCep = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtbUsuarios = new javax.swing.JTable();
+        jtbCidade = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("ID:");
+        lblId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblId.setText("ID:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Cidade:");
@@ -66,7 +67,7 @@ public class CadastroCidade extends javax.swing.JFrame {
             }
         });
 
-        jtbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jtbCidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -74,12 +75,12 @@ public class CadastroCidade extends javax.swing.JFrame {
                 "Cidade", "Cep", "Endereco"
             }
         ));
-        jtbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbCidade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtbUsuariosMousePressed(evt);
+                jtbCidadeMousePressed(evt);
             }
         });
-        jScrollPane2.setViewportView(jtbUsuarios);
+        jScrollPane2.setViewportView(jtbCidade);
 
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,13 +98,13 @@ public class CadastroCidade extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
+                            .addComponent(lblId)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jTextField3)
+                            .addComponent(txtCep, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtEndereco)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1))
+                            .addComponent(txtNome))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -116,19 +117,19 @@ public class CadastroCidade extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
@@ -143,46 +144,26 @@ public class CadastroCidade extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        boolean retorno = validarDados();
-        if(retorno){
-
-            Usuario usuario = guardarDados();
-            //SALVAR NO BANCO DE DADOS
-
-            UsuarioController objController = new UsuarioController();
-
-            if(objController.verificaExistencia(usuario) == true){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Este login já existe!");
-            }else{
-                retorno = objController.incluir(usuario);
-                if(retorno){
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário incluído com sucesso");
-                }else{
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir usuário");
-                }
-            }
-
-        }else{
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao validar");
-        }
+        
+       
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jtbUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuariosMousePressed
+    private void jtbCidadeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCidadeMousePressed
         try {
             //pega a linha selecionada
-            int linhaSelecionada = jtbUsuarios.getSelectedRow();
+            int linhaSelecionada = jtbCidade.getSelectedRow();
 
             UsuarioController objUsuarioController = new UsuarioController();
 
             // Primeira coluna da linha
-            String codigo = jtbUsuarios.getModel().getValueAt(linhaSelecionada, 0).toString();
+            String codigo = jtbCidade.getModel().getValueAt(linhaSelecionada, 0).toString();
 
             //buscar no banco de dados o registro e preencher nos campos da tela
             objUsuarioController = new UsuarioController();
             Usuario objeto = objUsuarioController.buscar(codigo);
 
             //Verifica se clicou na coluna 2 => EXCLUIR
-            if (jtbUsuarios.isColumnSelected(2)) {
+            if (jtbCidade.isColumnSelected(2)) {
                 try {
                     boolean wPergunta = CaixaDeDialogo.obterinstancia()
                     .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
@@ -203,146 +184,36 @@ public class CadastroCidade extends javax.swing.JFrame {
                 }
             } else {
                 
-                    preencherCampos(objeto);
                
             }
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
         }
-    }//GEN-LAST:event_jtbUsuariosMousePressed
+    }//GEN-LAST:event_jtbCidadeMousePressed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-       try{
-
-            TelaPrincipal tela = new TelaPrincipal();
-            tela.setVisible(true);
-            dispose();
-
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Sucesso");
-
-        }catch(Exception ex){
-
-        }
-
+      
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     
     
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroCidade().setVisible(true);
-            }
-        });
-    }
-    
-    
-    
-    private Usuario guardarDados(){
-        try{
-            Usuario objeto = new Usuario();
-            
-            
-            
-            
-                        
-            return objeto;
-            
-        }catch(Exception ex){
-            return null;
-        }
-    }
-    
-    private Usuario Atualizar(){
-      try {
-
-
-            UsuarioController objUsuarioController = new UsuarioController();
-           JTable jtbUsuarios = null;
-            
-            
-
-            objUsuarioController.preencher(jtbUsuarios);
-
-
-        } catch (Exception ex) {
-    
-            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
-        }
-            return null;
-        }
-    
-
-   
-     
-      //função para buscar as informações e preencher em tela
-    private void atualizarTabela(String filtro) {
-        try {
-         UsuarioController   objUsuarioController = new UsuarioController();
-            objUsuarioController.preencher(jtbUsuarios);
-
-        } catch (Exception ex) {
-            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
-        }
-    }
-     
-     private void preencherCampos(Usuario objeto){
-         try{
-        
-       
-         
-     }catch(Exception ex){
-     }
-     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable jtbUsuarios;
+    private javax.swing.JTable jtbCidade;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JTextField txtCep;
+    private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validarDados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
 }

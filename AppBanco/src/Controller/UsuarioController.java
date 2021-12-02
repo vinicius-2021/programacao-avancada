@@ -11,11 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +33,7 @@ public class UsuarioController {
     //    this.jtbUsuarios = jtbUsuarios;
     //}
     
-    public boolean login(String user, String pass)
+    public boolean login(String cpf, String senha)
     {
         try {
             //Conexao.abreConexao();
@@ -45,10 +41,10 @@ public class UsuarioController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id, nome FROM usuarios WHERE login = ? AND senha = md5(md5(encode(?::bytea, 'base64'))) ";
+            String wSQL = "  SELECT cpf,senha FROM usuarios WHERE login = ? AND senha = md5(md5(encode(?::bytea, 'base64'))) ";
             stmt = con.prepareStatement(wSQL);
-            stmt.setString(1, user);    
-            stmt.setString(2, pass);
+            stmt.setString(1, cpf);    
+            stmt.setString(2, senha);
     
             rs = stmt.executeQuery();
             
@@ -73,10 +69,12 @@ public class UsuarioController {
             ResultSet rs = null;
             PreparedStatement stmt = null;
            
-            String wSQL = " SELECT id FROM usuarios WHERE login = ? ";
+            String wSQL = "  SELECT cpf,senha FROM usuarios WHERE login = ? ";
             stmt = con.prepareStatement(wSQL);
-            stmt.setString(1, objeto.getLogin());    
-    
+             
+            stmt.setString(1, objeto.getCpf());    
+             stmt.setString(2, objeto.getSenha());
+     
             rs = stmt.executeQuery();
             
             if(rs.next()){
@@ -113,12 +111,13 @@ public class UsuarioController {
             if(rs.next()){
                 objUsuario = new Usuario();
                 
-                objUsuario.setId(rs.getInt("id"));
                 objUsuario.setNome(rs.getString("nome"));
-                objUsuario.setLogin(rs.getString("login"));
+                objUsuario.setCpf(rs.getString("cpf"));
                 objUsuario.setSenha(rs.getString("senha"));
-               // objUsuario.setExcluido(rs.getBoolean("excluido"));  
-               // objUsuario.setId_bairro(rs.getInt("id_bairro"));              
+                objUsuario.setGenero(rs.getString("genero"));
+                objUsuario.setNascimento(rs.getString("nascimento"));
+                
+                            
             }
               
         } catch (SQLException ex ){
@@ -167,11 +166,16 @@ public class UsuarioController {
                 return false;
             }else{
            
-                String wSQL = " INSERT INTO usuarios VALUES(DEFAULT, ?, ?, md5(md5(encode(?::bytea, 'base64')))) ";
+                String wSQL = " INSERT INTO usuarios VALUES(2, ?, ?, md5(md5(encode(?::bytea, 'base64'))), ?, ?) ";
                 stmt = con.prepareStatement(wSQL);
+                  
                 stmt.setString(1, objeto.getNome());    
-                stmt.setString(2, objeto.getLogin());            
+                stmt.setString(2, objeto.getCpf());            
                 stmt.setString(3, objeto.getSenha());
+                stmt.setString(4, objeto.getGenero());
+                stmt.setString(5, objeto.getNascimento());
+              
+                
 
                 stmt.executeUpdate();
             
@@ -196,19 +200,18 @@ public class UsuarioController {
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector(); //receber os dados do banco
         
-        cabecalhos.add("ID");
-        cabecalhos.add("Nome");
-        cabecalhos.add("Cpf");
-        cabecalhos.add("Genero");
-        cabecalhos.add("Nascimento");
+        cabecalhos.add("nome");
+        cabecalhos.add("cpf");
+        cabecalhos.add("genero");
+        cabecalhos.add("nascimento");
         cabecalhos.add("Exc");
-             
+            
         ResultSet result = null;
         
         try {
 
 
-            String wSql = " SELECT id, nome,cpf,genero,nascimento  FROM usuarios ORDER BY nome ";
+            String wSql = " SELECT nome,cpf,senha,genero,nascimento  FROM usuarios ORDER BY nome ";
             
             result = Conexao.stmt.executeQuery(wSql);
             
@@ -218,6 +221,8 @@ public class UsuarioController {
                 
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
+                linha.add(result.getString(4));
+                linha.add(result.getString(5));
                 linha.add("X");
                 
                 dadosTabela.add(linha);
